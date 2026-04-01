@@ -17,8 +17,6 @@ from .models import Resume, ResumeData, Answer
 
 import openai
 
-client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)
-
 # 📄 PDF TEXT EXTRACTION
 def extract_text_pdf(file_path):
     try:
@@ -96,6 +94,12 @@ def extract_resume_data_ai(text):
     try:
         if not text:
             return None
+
+        api_key = getattr(settings, "OPENAI_API_KEY", None)
+        if not api_key:
+            return None
+
+        client = openai.OpenAI(api_key=api_key)
 
         text = text[:4000]
 
