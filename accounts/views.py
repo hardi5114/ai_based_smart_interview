@@ -149,6 +149,15 @@ Resume:
 
 
 # =====================================================
+# 🏠 HOME
+# =====================================================
+def home_view(request):
+    if request.user.is_authenticated:
+        return redirect("accounts:dashboard")
+    return redirect("accounts:login")
+
+
+# =====================================================
 # 🏠 REGISTER
 # =====================================================
 def register_view(request):
