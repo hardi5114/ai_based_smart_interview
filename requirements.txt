@@ -1,4 +1,6 @@
-Django
-gunicorn
-Pillow
-requests
+openai
+numpy
+pandas
+scikit-learn
+transformers
+torch
