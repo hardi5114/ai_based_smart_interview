@@ -4,33 +4,37 @@
 {% block content %}
 
 <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
     /* Center wrapper */
     .page-wrapper {
         min-height: 75vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 20px;
     }
 
-    /* Glass Card (same as register) */
+    /* Login container (NO bootstrap conflict) */
+    .login-container {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    /* Glass Card */
     .card {
         border-radius: 15px;
-
         background: rgba(255, 255, 255, 0.12);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-
         border: 1px solid rgba(255, 255, 255, 0.25);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-
         color: white;
+        padding: 25px;
     }
 
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
-
-    /* Heading glow */
     h2 {
         font-weight: 600;
         letter-spacing: 0.5px;
@@ -38,7 +42,6 @@
         text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
     }
 
-    /* Links */
     p,
     a {
         color: white;
@@ -83,45 +86,25 @@
         box-shadow: 0 0 18px rgba(0, 255, 255, 0.6);
     }
 
-    /* ===== RESPONSIVE WIDTH FIX ===== */
-    .login-container {
-        width: 100%;
-        max-width: 420px;
-        /* desktop size */
-        margin: auto;
-    }
-
-    /* Mobile screen */
-    /* ===== MOBILE WIDTH INCREASE ===== */
-    @media (max-width:576px) {
-
-        .page-wrapper {
-            padding: 15px;
-        }
-
-        .col-md-5 {
-            width: 100%;
+    /* MOBILE FIX */
+    @media (max-width: 768px) {
+        .login-container {
             max-width: 95%;
-            margin: auto;
         }
 
         .card {
-            padding: 28px !important;
+            padding: 20px;
         }
-    }
 
-    /* Tablet */
-    @media (min-width:577px) and (max-width:991px) {
-        .login-container {
-            max-width: 450px;
+        .page-wrapper {
+            padding: 10px;
         }
     }
 </style>
 
 <div class="page-wrapper">
-
-    <div class="col-12 col-md-5">
-        <div class="card p-4 shadow-lg">
+    <div class="login-container">
+        <div class="card shadow-lg">
 
             <h2 class="text-center mb-4">Login</h2>
 
@@ -139,7 +122,6 @@
                 <button type="submit" class="btn btn-primary w-100">
                     Login
                 </button>
-
             </form>
 
             <p class="mt-3 text-center">
@@ -148,9 +130,7 @@
             </p>
 
         </div>
-
     </div>
-
 </div>
 
 {% endblock %}

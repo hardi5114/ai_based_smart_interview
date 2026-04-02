@@ -4,31 +4,32 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{% block title %}AI Smart Interview{% endblock %}</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Custom CSS -->
+    <!-- Custom -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
     <style>
         body {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            margin: 0;
             color: #fff;
 
-            background: linear-gradient(rgba(0, 0, 0, 0.4),
-                rgba(0, 0, 0, 0.4)),
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
             url("{% static 'images/background2.jpg' %}") no-repeat center center fixed;
 
             background-size: cover;
         }
 
+        /* FIXED HEADER */
         header {
             background: rgba(0, 0, 0, 0.6);
             padding: 1rem 2rem;
@@ -41,15 +42,14 @@
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
         }
 
+        /* MAIN SAFE AREA */
         main {
-            margin-top: 130px;
-            margin-bottom: 60px;
-            padding-top: 30px;
-            /* 🔥 space below header */
-            padding-bottom: 2px;
-            /* space above footer */
+            padding-top: 100px;
+            padding-bottom: 80px;
+            min-height: 100vh;
         }
 
+        /* GLASS CARD GLOBAL */
         .card {
             background: rgba(255, 255, 255, 0.15) !important;
             backdrop-filter: blur(12px);
@@ -61,7 +61,6 @@
         .form-control {
             background: rgba(255, 255, 255, 0.65);
             border: none;
-            border-radius: 0.5rem;
         }
 
         .btn-primary {
@@ -71,28 +70,19 @@
 
         .btn-primary:hover {
             background: #fff;
-            color: black;
+            color: #000;
         }
 
         .nav-link {
-            color: #fffcf4 !important;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-            font-size: large;
-        }
-
-        .nav-link:hover {
             color: #fff !important;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
         }
 
         a {
-            color: #ffffff;
+            color: #fff;
         }
 
-        a:hover {
-            color: #080807;
-        }
-
-        /* 🌟 FIX: Floating messages (NO layout shift) */
+        /* FLOATING MESSAGES */
         .message-container {
             position: fixed;
             top: 90px;
@@ -112,41 +102,54 @@
             border-radius: 12px;
         }
 
+        /* FOOTER FIXED */
         footer {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-
-            padding: 7px;
+            padding: 8px;
             text-align: center;
             font-size: 0.9rem;
-
-            color: white;
-
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(10px);
-
             text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
         }
-    </style>
 
+        /* MOBILE FIX */
+        @media (max-width: 768px) {
+
+            header {
+                padding: 10px 15px;
+            }
+
+            main {
+                padding-top: 110px;
+                padding-bottom: 90px;
+            }
+
+            .message-container {
+                top: 80px;
+                max-width: 95%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- HEADER -->
     <header class="d-flex justify-content-between align-items-center">
-        <h2 class="mb-0 text-white">AI Smart Interview</h2>
+        <h2 class="mb-0">AI Smart Interview</h2>
 
         {% if user.is_authenticated %}
-        <a href="{% url 'accounts:logout' %}" class="nav-link text-white fw-semibold">
+        <a href="{% url 'accounts:logout' %}" class="nav-link">
             Logout
         </a>
         {% endif %}
     </header>
 
-    <!-- 🌟 FLOATING MESSAGES (NO layout shift) -->
+    <!-- MESSAGES -->
     <div class="message-container">
         {% if messages %}
         {% for message in messages %}
@@ -158,8 +161,8 @@
         {% endif %}
     </div>
 
-    <!-- MAIN -->
-    <main class="container my-5">
+    <!-- CONTENT -->
+    <main class="container">
         {% block content %}{% endblock %}
     </main>
 
