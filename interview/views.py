@@ -6,16 +6,12 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from openai import OpenAI
+import openai
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 
 from .models import InterviewResult, InterviewResponse
-
-
-# ================= OPENAI CLIENT =================
-client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 
 # =====================================================
@@ -89,6 +85,12 @@ def generate_ai_question(user, round_type):
     }
 
     try:
+        api_key = getattr(settings, "OPENAI_API_KEY", None)
+        if not api_key:
+            return "Tell me about yourself."
+
+        client = openai.OpenAI(api_key=api_key)
+
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
@@ -110,6 +112,12 @@ def generate_ai_question(user, round_type):
 def ai_score_answer(question, answer):
 
     try:
+        api_key = getattr(settings, "OPENAI_API_KEY", None)
+        if not api_key:
+            return {"score": 0, "feedback": "AI scoring unavailable: OPENAI_API_KEY not configured"}
+
+        client = openai.OpenAI(api_key=api_key)
+
         prompt = f"""
 Return ONLY JSON.
 
