@@ -31,7 +31,7 @@ load_dotenv()   # loads .env file
 # ==============================
 SECRET_KEY = 'django-insecure-ynam0^4!(f2bt$varf!)7tf4$%b8c9ut0gc-qnt2#l6!f2)62y'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -137,12 +137,9 @@ USE_TZ = True
 # STATIC FILES
 # ==============================
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ==============================
 # MEDIA FILES
